@@ -274,7 +274,10 @@ def test(ALERTID=None):
     return "OK"
 
 
+
+import loginsightwebhookdemo.pagerduty
 # Import individual shims
+'''
 import loginsightwebhookdemo.bigpanda
 import loginsightwebhookdemo.bugzilla
 import loginsightwebhookdemo.groove
@@ -289,9 +292,10 @@ import loginsightwebhookdemo.pushbullet
 import loginsightwebhookdemo.servicenow
 import loginsightwebhookdemo.slack
 import loginsightwebhookdemo.socialcast
-#import loginsightwebhookdemo.template
+import loginsightwebhookdemo.template
 import loginsightwebhookdemo.travisci
 import loginsightwebhookdemo.vrealizeorchestrator
 import loginsightwebhookdemo.zendesk
 import loginsightwebhookdemo.moogsoft
 import loginsightwebhookdemo.msteams
+'''

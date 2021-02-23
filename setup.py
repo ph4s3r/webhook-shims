@@ -3,7 +3,13 @@
 import os, sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
-from pip.req import parse_requirements
+#from pip.req import parse_requirements
+from pip._internal.req import parse_requirements
+
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
 
 try:
     from loginsightwebhookdemo import __version__ as loginsightwebhookdemoversion  # TODO Replace with a static variant?
@@ -21,13 +27,15 @@ except:
             HDIR = os.environ['TRAVIS_BUILD_DIR']
     except:
         HDIR = '.'
-install_reqs = parse_requirements(HDIR + '/requirements.txt', session='hack')
-test_reqs = parse_requirements(HDIR + '/test-requirements.txt', session='hack')
+
+#install_reqs = parse_requirements(HDIR + '/requirements.txt', session='hack')
+#test_reqs = parse_requirements(HDIR + '/test-requirements.txt', session='hack')
+
 
 # reqs is a list of requirement
 # e.g. ['django==1.5.1', 'mezzanine==1.4.6']
-reqs = [str(ir.req) for ir in install_reqs]
-treqs = [str(ir.req) for ir in test_reqs]
+reqs = parse_requirements(HDIR + '/requirements.txt')
+treqs = parse_requirements(HDIR + '/test-requirements.txt')
 
 class PyTest(TestCommand):
     user_options = [('pytest-args=', 'a', "Arguments to pass to pytest")]
