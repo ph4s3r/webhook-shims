@@ -1,0 +1,20 @@
+{
+   "startDate":1369757346267,
+   "criticality":"ALERT_CRITICALITY_LEVEL_WARNING",
+   "Risk":4.0,
+   "resourceId":"sample-object-uuid",
+   "alertId":"sample-alert-uuid",
+   "status":"ACTIVE",
+   "subType":"ALERT_SUBTYPE_AVAILABILITY_PROBLEM",
+   "cancelDate":1369757346267,
+   "resourceKind":"sample-object-type",
+   "alertName":"Invalid IP Address for connected Leaf Switch",
+   "attributeKeyID":5325,
+   "Efficiency":1.0,
+   "adapterKind":"sample-adapter-type",
+   "Health":1.0,
+   "type":"ALERT_TYPE_APPLICATION_PROBLEM",
+   "resourceName":"sample-object-name",
+   "updateDate":1369757346267,
+   "info":"sample-info"
+}
