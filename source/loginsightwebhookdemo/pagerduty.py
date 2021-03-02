@@ -30,8 +30,8 @@ def pagerduty(SERVICEKEY=None, ALERTID=None):
     a = parse(request)
 
     payload = {
-        "service_key": SERVICEKEY,
-        "event_type": "trigger",
+        "routing_key": SERVICEKEY,
+        "event_action": "trigger",
         "description": a['AlertName'],
         "details": {
             "notes": a['info'],
