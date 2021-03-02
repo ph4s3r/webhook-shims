@@ -10,19 +10,13 @@ __license__ = "Apache v2"
 __version__ = "1.1"
 
 
-# PagerDuty post url defined by https://v2.developer.pagerduty.com/v2/docs/trigger-events - don't change
 PAGERDUTYURL = 'https://events.pagerduty.com/v2/enqueue'
 
 # DO NOT MODIFY ANYTHING BELOW HERE!!!
 @app.route("/endpoint/pagerduty/<SERVICEKEY>", methods=['POST'])
 @app.route("/endpoint/pagerduty/<SERVICEKEY>/<ALERTID>", methods=['POST','PUT'])
+
 def pagerduty(SERVICEKEY=None, ALERTID=None):
-    """
-    Create a new incident for the Pagerduty service identified by `SERVICEKEY` in the URL.
-    Uses the https://v2.developer.pagerduty.com/v2/docs/trigger-events API directly.
-    """
-    if not PAGERDUTYURL:
-        return ("PAGERDUTYURL parameter must be set properly, please edit the shim!", 500, None)
     if not SERVICEKEY:
         return ("SERVICEKEY must be set in the URL (e.g. /endpoint/pagerduty/<SERVICEKEY>", 500, None)
 
@@ -30,6 +24,23 @@ def pagerduty(SERVICEKEY=None, ALERTID=None):
     a = parse(request)
 
     payload = {
+	"payload": {
+		"summary": a['AlertName'],
+		"source": a['hookName'],
+		"severity": "info",
+		"custom_details": {
+			"startDate": a['startDate'],
+			"criticality": a['criticality'],
+			"resourceId": a['resourceId'],
+			"alertId": a['alertId'],
+			"status": a['status'],
+			"resourceName": a['resourceName'],
+			"updateDate": a['updateDate'],
+			"info": a['info'],
+			"moreinfo": a['moreinfo'],
+			"fields": a['fields']
+		},
+	},
         "routing_key": SERVICEKEY,
         "event_action": "trigger",
         "description": a['AlertName'],
